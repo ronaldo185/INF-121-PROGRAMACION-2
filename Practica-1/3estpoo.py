@@ -1,5 +1,6 @@
 # 3 Estadsticas: calcular el promedio y la desviacion estandar.
 # usando programacion orientada a objetos
+#
 import math
 
 class Estadistica:
