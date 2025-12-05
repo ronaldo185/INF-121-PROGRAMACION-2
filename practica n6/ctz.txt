@@ -1,0 +1,447 @@
+class Autor:
+    def __init__(self, nombre: str, nacionalidad: str):
+        self.nombre = nombre
+        self.nacionalidad = nacionalidad
+
+
+    def mostrar_info(self) -> None:
+        print(f"Autor: {self.nombre}, Nacionalidad: {self.nacionalidad}")
+
+    def __str__(self) -> str:
+        return f"{self.nombre} ({self.nacionalidad})"
+------------
+from libro import Libro
+from autor import Autor
+from prestamo import Prestamo
+from estudiante import Estudiante
+
+class Biblioteca:
+    class Horario:
+        def __init__(self, dias_apertura: str, hora_apertura: str, hora_cierre: str):
+            self.dias_apertura = dias_apertura
+            self.hora_apertura = hora_apertura
+            self.hora_cierre = hora_cierre
+
+        def mostrar_horario(self):
+            print(f"Horario: {self.dias_apertura} de {self.hora_apertura} a {self.hora_cierre}")
+
+        def __str__(self):
+            return f"{self.dias_apertura} {self.hora_apertura}-{self.hora_cierre}"
+
+    def __init__(self, nombre: str, dias_apertura: str, hora_apertura: str, hora_cierre: str):
+        self.nombre = nombre
+        self.horario = Biblioteca.Horario(dias_apertura, hora_apertura, hora_cierre)  # composición
+        self.libros: list[Libro] = []      # agregación
+        self.autores: list[Autor] = []     # agregación
+        self.prestamos: list[Prestamo] = []  # lista de préstamos activos
+
+    # Métodos para agregar libros
+    def agregar_libro(self, libro: Libro):
+        self.libros.append(libro)
+
+    # Métodos para agregar autores
+    def agregar_autor(self, autor: Autor):
+        self.autores.append(autor)
+
+    # Método para prestar libros
+    def prestar_libro(self, estudiante: Estudiante, libro: Libro):
+        p = Prestamo(estudiante, libro)
+        self.prestamos.append(p)
+        print(f"Libro prestado exitosamente: {libro.get_titulo()}")
+
+    # Método para mostrar el estado de la biblioteca
+    def mostrar_estado(self):
+        print(f"\n--- Biblioteca: {self.nombre} ---")
+        self.horario.mostrar_horario()
+
+        print("\nLibros disponibles:")
+        for l in self.libros:
+            print(f"- {l.get_titulo()}")
+
+        print("\nAutores registrados:")
+        for a in self.autores:
+            a.mostrar_info()
+
+        print("\nPrestamos activos:")
+        for p in self.prestamos:
+            p.mostrar_info()
+
+    # Método para cerrar la biblioteca
+    def cerrar_biblioteca(self):
+        self.prestamos.clear()
+        print(f"\nLa biblioteca {self.nombre} ha cerrado. Todos los préstamos han sido eliminados.")
+------------------
+class Estudiante:
+    def __init__(self, codigo: str, nombre: str):
+        self.codigo = codigo
+        self.nombre = nombre
+
+
+    def mostrar_info(self) -> None:
+        print(f"Estudiante: {self.nombre}, Codigo: {self.codigo}")
+
+    def __str__(self) -> str:
+        return f"{self.nombre} [{self.codigo}]"
+----------------------------
+
+class Horario:
+
+    def __init__(self, dias_apertura: str, hora_apertura: str, hora_cierre: str):
+        self.dias_apertura = dias_apertura
+        self.hora_apertura = hora_apertura
+        self.hora_cierre = hora_cierre
+
+
+    def mostrar_horario(self) -> None:
+        print(f"Horario: {self.dias_apertura} de {self.hora_apertura} a {self.hora_cierre}")
+
+    def __str__(self) -> str:
+        return f"{self.dias_apertura} {self.hora_apertura}-{self.hora_cierre}"
+
+------------------------
+
+from typing import List
+from pagina import Pagina
+
+
+class Libro:
+    
+    def __init__(self, titulo: str, isbn: str, paginas: List[Pagina] = None):
+        self.titulo = titulo
+        self.isbn = isbn
+        self.paginas: List[Pagina] = paginas or []
+
+    # Constructor alternativo similar a Java: crear con lista de páginas ya provista
+    @classmethod
+    def desde_paginas(cls, titulo: str, isbn: str, paginas: List[Pagina]):
+        return cls(titulo, isbn, paginas)
+
+
+    def agregar_pagina(self, pagina: Pagina) -> None:
+        self.paginas.append(pagina)
+
+    def leer(self) -> None:
+        print(f"\nLeyendo libro: {self.titulo}")
+        for p in self.paginas:
+            p.mostrar_pagina()
+
+
+    def get_titulo(self) -> str:
+        return self.titulo
+
+    def __str__(self) -> str:
+        return f"{self.titulo} (ISBN: {self.isbn})"
+
+-----------------------
+class Pagina:   
+    def __init__(self, numero: int, contenido: str):
+        self.numero = numero
+        self.contenido = contenido
+
+
+    def mostrar_pagina(self) -> None:
+        print(f"Página {self.numero}: {self.contenido}")
+
+    def __str__(self) -> str:
+        return f"Página {self.numero}: {self.contenido[:30]}"
+
+----------------------------------
+
+from datetime import datetime, timedelta
+
+
+class Prestamo:
+    def __init__(self, estudiante, libro):
+        self.estudiante = estudiante
+        self.libro = libro
+        self.fecha_prestamo = datetime.now()
+        self.fecha_devolucion = self.fecha_prestamo + timedelta(days=7)
+
+
+    def mostrar_info(self) -> None:
+        titulo = self.libro.get_titulo() if hasattr(self.libro, 'get_titulo') else getattr(self.libro, 'titulo', str(self.libro))
+        print(f"\nPrestamo de libro: {titulo}")
+        if hasattr(self.estudiante, 'mostrar_info'):
+            self.estudiante.mostrar_info()
+        else:
+            print(self.estudiante)
+            print("Fecha de prestamo:", self.fecha_prestamo)
+            print("Fecha de devolucion:", self.fecha_devolucion)
+
+-------------------------------
+from biblioteca import Biblioteca
+from autor import Autor
+from libro import Libro
+from pagina import Pagina
+from estudiante import Estudiante
+
+
+if __name__ == '__main__':
+    # Crear biblioteca
+    biblioteca = Biblioteca("Biblioteca UMSA", "Lunes a Viernes", "08:00", "18:00")
+
+    # Crear autores
+    autor1 = Autor("Gabriel Garcia Marquez", "Colombiano")
+    autor2 = Autor("Isabel Allende", "Chilena")
+    biblioteca.agregar_autor(autor1)
+    biblioteca.agregar_autor(autor2)
+
+
+    # Crear libros con páginas (composición Libro-Pagina)
+    libro1 = Libro("Cien Años de Soledad", "ISBN001", [])
+    libro1.agregar_pagina(Pagina(1, "Capítulo 1..."))
+    libro1.agregar_pagina(Pagina(2, "Capítulo 2..."))
+
+
+    libro2 = Libro("La Casa de los Espíritus", "ISBN002", [Pagina(1, "Capítulo 1...")])
+
+
+    biblioteca.agregar_libro(libro1)
+    biblioteca.agregar_libro(libro2)
+
+
+    # Crear estudiante
+    estudiante = Estudiante("S001", "Juan Perez")
+
+
+    # Prestar libro
+    biblioteca.prestar_libro(estudiante, libro1)
+
+
+    # Mostrar estado
+    biblioteca.mostrar_estado()
+
+
+    # Cerrar biblioteca
+    biblioteca.cerrar_biblioteca()
+
+
+    /***************************************************************
+**************************************************************
+
+
+import json
+from autor import Autor
+from libro import Libro
+from prestamo import Prestamo
+from estudiante import Estudiante
+
+class Biblioteca:
+    def __init__(self, nombre: str):
+        self.nombre = nombre
+        self.autores = []
+        self.libros = []
+        self.prestamos = []
+
+    # Agregación
+    def agregar_autor(self, autor: Autor):
+        self.autores.append(autor)
+
+    def agregar_libro(self, libro: Libro):
+        self.libros.append(libro)
+
+    # Asociación
+    def prestar_libro(self, estudiante: Estudiante, libro: Libro):
+        prestamo = Prestamo(estudiante, libro)
+        self.prestamos.append(prestamo)
+        return prestamo
+
+    def mostrar_estado(self):
+        return {
+            "autores": [a.mostrar_info() for a in self.autores],
+            "libros": [l.get_titulo() for l in self.libros],
+            "prestamos": [p.mostrar_info() for p in self.prestamos]
+        }
+
+    # Persistencia
+    def guardar(self, archivo: str):
+        data = {
+            "autores": [a.to_dict() for a in self.autores],
+            "libros": [l.to_dict() for l in self.libros],
+            "prestamos": [p.to_dict() for p in self.prestamos]
+        }
+        with open(archivo, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4)
+
+    def cargar(self, archivo: str):
+        try:
+            with open(archivo, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            self.autores = [Autor.from_dict(a) for a in data.get("autores", [])]
+            self.libros = [Libro.from_dict(l) for l in data.get("libros", [])]
+            self.prestamos = [Prestamo.from_dict(p) for p in data.get("prestamos", [])]
+        except FileNotFoundError:
+            pass
+*-*-*-*-*-**-*-*-*--**-*-*-*-*-*-*--**-*-*-*-*--
+-*-**--*-*-*-*-*-*-*-*-*-*-
+
+
+import json
+from autor import Autor
+from libro import Libro, Pagina
+from estudiante import Estudiante
+from prestamo import Prestamo
+
+
+def guardar_biblioteca(biblio, archivo="biblioteca.json"):
+    data = {
+        "nombre": biblio.nombre,
+        "horario": {
+            "dias_apertura": biblio.horario.dias_apertura,
+            "hora_apertura": biblio.horario.hora_apertura,
+            "hora_cierre": biblio.horario.hora_cierre
+        },
+        "autores": [{"nombre": a.nombre, "nacionalidad": a.nacionalidad} for a in biblio.autores],
+        "libros": [
+            {
+                "titulo": l.titulo,
+                "isbn": l.isbn,
+                "paginas": [{"numero": p.numero, "contenido": p.contenido} for p in l.paginas]
+            } for l in biblio.libros
+        ],
+        "prestamos": [
+            {
+                "estudiante": {"codigo": p.estudiante.codigo, "nombre": p.estudiante.nombre},
+                "libro_isbn": p.libro.isbn
+            } for p in biblio.prestamos
+        ]
+    }
+
+    with open(archivo, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+
+def cargar_biblioteca(archivo="biblioteca.json"):
+    from biblioteca import Biblioteca
+    with open(archivo, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    biblio = Biblioteca(
+        data["nombre"],
+        data["horario"]["dias_apertura"],
+        data["horario"]["hora_apertura"],
+        data["horario"]["hora_cierre"]
+    )
+
+    for a in data["autores"]:
+        biblio.agregar_autor(Autor(a["nombre"], a["nacionalidad"]))
+
+    for l in data["libros"]:
+        libro = Libro(l["titulo"], l["isbn"])
+        for p in l["paginas"]:
+            libro.agregar_pagina(Pagina(p["numero"], p["contenido"]))
+        biblio.agregar_libro(libro)
+
+
+    for p in data.get("prestamos", []):
+        estudiante = Estudiante(p["estudiante"]["codigo"], p["estudiante"]["nombre"])
+        libro = next((x for x in biblio.libros if x.isbn == p["libro_isbn"]), None)
+        if libro:
+            from prestamo import Prestamo
+            biblio.prestamos.append(Prestamo(estudiante, libro))
+
+    return biblio
+
+-------------------------
+import tkinter as tk
+from tkinter import messagebox
+from biblioteca import Biblioteca
+from autor import Autor
+from libro import Libro
+from pagina import Pagina
+from estudiante import Estudiante
+from prestamo import Prestamo
+import json
+
+def guardar_biblio(biblio: Biblioteca, archivo="biblioteca.json"):
+    data = {
+        "nombre": biblio.nombre,
+        "horario": {
+            "dias": biblio.horario.dias_apertura,
+            "inicio": biblio.horario.hora_apertura,
+            "fin": biblio.horario.hora_cierre
+        },
+        "autores": [{"nombre": a.nombre, "nacionalidad": a.nacionalidad} for a in biblio.autores],
+        "libros": [{"titulo": l.titulo, "isbn": l.isbn} for l in biblio.libros]
+    }
+    with open(archivo, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+    messagebox.showinfo("Guardar", "Biblioteca guardada.")
+
+def cargar_biblio(archivo="biblioteca.json"):
+    with open(archivo, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    b = Biblioteca(data["nombre"], data["horario"]["dias"], data["horario"]["inicio"], data["horario"]["fin"])
+    for a in data["autores"]:
+        b.agregar_autor(Autor(a["nombre"], a["nacionalidad"]))
+    for l in data["libros"]:
+        b.agregar_libro(Libro(l["titulo"], l["isbn"]))
+    messagebox.showinfo("Cargar", "Biblioteca cargada.")
+    return b
+
+def agregar_autor():
+    nombre = entry_autor_nombre.get()
+    nacionalidad = entry_autor_nac.get()
+    if nombre and nacionalidad:
+        biblioteca.agregar_autor(Autor(nombre, nacionalidad))
+        messagebox.showinfo("Autor", f"Autor {nombre} agregado.")
+    else:
+        messagebox.showwarning("Autor", "Rellena ambos campos.")
+
+def agregar_libro():
+    titulo = entry_libro_titulo.get()
+    isbn = entry_libro_isbn.get()
+    if titulo and isbn:
+        libro = Libro(titulo, isbn)
+        biblioteca.agregar_libro(libro)
+        messagebox.showinfo("Libro", f"Libro {titulo} agregado.")
+    else:
+        messagebox.showwarning("Libro", "Rellena ambos campos.")
+
+def mostrar_estado():
+    texto = f"Biblioteca: {biblioteca.nombre}\nHorario: {biblioteca.horario}\n\nAutores:\n"
+    texto += "\n".join([str(a) for a in biblioteca.autores])
+    texto += "\n\nLibros:\n"
+    texto += "\n".join([str(l) for l in biblioteca.libros])
+    messagebox.showinfo("Estado Biblioteca", texto)
+
+biblioteca = Biblioteca("Biblioteca UMSA", "Lunes a Viernes", "08:00", "18:00")
+
+root = tk.Tk()
+root.title("Biblioteca UMSA")
+
+
+tk.Label(root, text="Nombre Autor:").grid(row=0, column=0)
+entry_autor_nombre = tk.Entry(root)
+entry_autor_nombre.grid(row=0, column=1)
+
+tk.Label(root, text="Nacionalidad:").grid(row=1, column=0)
+entry_autor_nac = tk.Entry(root)
+entry_autor_nac.grid(row=1, column=1)
+
+tk.Button(root, text="Agregar Autor", command=agregar_autor).grid(row=2, column=0, columnspan=2, sticky="we")
+
+tk.Label(root, text="Título Libro:").grid(row=3, column=0)
+entry_libro_titulo = tk.Entry(root)
+entry_libro_titulo.grid(row=3, column=1)
+
+tk.Label(root, text="ISBN:").grid(row=4, column=0)
+entry_libro_isbn = tk.Entry(root)
+entry_libro_isbn.grid(row=4, column=1)
+
+tk.Button(root, text="Agregar Libro", command=agregar_libro).grid(row=5, column=0, columnspan=2, sticky="we")
+tk.Button(root, text="Mostrar Estado", command=mostrar_estado).grid(row=6, column=0, columnspan=2, sticky="we")
+tk.Button(root, text="Guardar Biblioteca", command=lambda: guardar_biblio(biblioteca)).grid(row=7, column=0, columnspan=2, sticky="we")
+tk.Button(root, text="Cargar Biblioteca", command=lambda: globals().update(biblioteca=cargar_biblio())).grid(row=8, column=0, columnspan=2, sticky="we")
+
+root.mainloop()
+-----------
+import tkinter as tk
+from biblioteca import Biblioteca
+from ui import AppBiblioteca
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    biblioteca = Biblioteca("Biblioteca UMSA", "Lunes a Viernes", "08:00", "18:00")
+    app = AppBiblioteca(root, biblioteca)
+    root.mainloop()

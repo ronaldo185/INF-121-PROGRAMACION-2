@@ -1,0 +1,68 @@
+{
+    "nombre": "Biblioteca UMSA",
+    "horario": {
+        "dias_apertura": "Lunes a Viernes",
+        "hora_apertura": "08:00",
+        "hora_cierre": "18:00"
+    },
+    "autores": [
+        {
+            "nombre": "raam",
+            "nacionalidad": "peru"
+        },
+        {
+            "nombre": "def",
+            "nacionalidad": "boli"
+        },
+        {
+            "nombre": "dfdfd",
+            "nacionalidad": "ven"
+        }
+    ],
+    "libros": [
+        {
+            "titulo": "qqwqert",
+            "isbn": "123",
+            "paginas": []
+        },
+        {
+            "titulo": "aasadf",
+            "isbn": "345",
+            "paginas": []
+        },
+        {
+            "titulo": "wtf",
+            "isbn": "456456",
+            "paginas": []
+        }
+    ],
+    "prestamos": [
+        {
+            "estudiante": {
+                "codigo": "123",
+                "nombre": "yop"
+            },
+            "libro": "qqwqert",
+            "fecha_prestamo": "2025-12-02T21:42:04.919674",
+            "fecha_devolucion": "2025-12-09T21:42:04.919674"
+        },
+        {
+            "estudiante": {
+                "codigo": "ewq",
+                "nombre": "ytu"
+            },
+            "libro": "aasadf",
+            "fecha_prestamo": "2025-12-02T21:42:04.919694",
+            "fecha_devolucion": "2025-12-09T21:42:04.919694"
+        },
+        {
+            "estudiante": {
+                "codigo": "t5t",
+                "nombre": "yor"
+            },
+            "libro": "wtf",
+            "fecha_prestamo": "2025-12-02T21:42:44.980047",
+            "fecha_devolucion": "2025-12-09T21:42:44.980047"
+        }
+    ]
+}
