@@ -1,0 +1,14 @@
+[
+    {
+        "idmed": 1,
+        "nombremed": "Juan",
+        "apellidomed": "Perez",
+        "aniosexperiencia": 10
+    },
+    {
+        "idmed": 3,
+        "nombremed": "Carlos",
+        "apellidomed": "Gomez",
+        "aniosexperiencia": 15
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "ci": 112,
+        "nombrepaciente": "Luis",
+        "apellidopaciente": "Rios",
+        "idmed": 1,
+        "dia": 26,
+        "mes": "diciembre",
+        "anio": 2024
+    },
+    {
+        "ci": 113,
+        "nombrepaciente": "Sofia",
+        "apellidopaciente": "Mendez",
+        "idmed": 1,
+        "dia": 26,
+        "mes": "enero",
+        "anio": 2024
+    },
+    {
+        "ci": 117,
+        "nombrepaciente": "Pedro",
+        "apellidopaciente": "Suarez",
+        "idmed": 3,
+        "dia": 26,
+        "mes": "enero",
+        "anio": 2024
+    },
+    {
+        "ci": 118,
+        "nombrepaciente": "Miguel",
+        "apellidopaciente": "Garcia",
+        "idmed": 3,
+        "dia": 3,
+        "mes": "marzo",
+        "anio": 2024
+    }
+]
