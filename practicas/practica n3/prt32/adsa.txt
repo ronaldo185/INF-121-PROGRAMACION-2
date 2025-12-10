@@ -1,0 +1,36 @@
++--------------------+
+|       Juego        |
++--------------------+
+| - numeroDeVidas:int
+| - record:int       |
++--------------------+
+| + reiniciaPartida():void
+| + actualizaRecord():void
+| + quitaVida():boolean
++--------------------+
+
+                ▲
+                │
++-------------------------------+
+|      JuegoAdivinaNumero       |
++-------------------------------+
+| - numeroAAdivinar:int         |
++-------------------------------+
+| + JuegoAdivinaNumero(int)     |
+| + juega():void                |
+| + validaNumero(int):boolean   |
++-------------------------------+
+
+        ▲                    ▲
+        │                    │
++-------------------+   +-------------------+
+| JuegoAdivinaPar   |   | JuegoAdivinaImpar |
++-------------------+   +-------------------+
+| + validaNumero()  |   | + validaNumero()  |
++-------------------+   +-------------------+
+
++---------------------+
+|     Aplicacion      |
++---------------------+
+| + main(String[])    |
++---------------------+

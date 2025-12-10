@@ -1,0 +1,14 @@
++------------------------+
+|    PoligonoRegular     |
++------------------------+
+| - n: int               |
+| - lado: double         |
+| - x: double            |
+| - y: double            |
++------------------------+
+| + PoligonoRegular()                        |
+| + PoligonoRegular(n: int, lado: double)    |
+| + PoligonoRegular(n: int, lado: double, x: double, y: double) |
+| + getPerimetro(): double                   |
+| + getArea(): double                        |
++------------------------+

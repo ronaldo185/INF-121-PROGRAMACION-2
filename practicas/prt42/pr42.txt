@@ -1,0 +1,61 @@
+Polimor smo, Clase Abstracta e Interface. Realice el siguiente programa 
+en Java o en Python. 
+
+a) Disene una interfaz llamada Coloreado con un metodo String 
+llamado comoColorear(). 
+
+b) Disene la clase abstracta Figura (atributo: color; metodos no 
+abstractos: setColor, getColor, toString; metodos abstractos: area 
+y perimetro). 
+
+c) Disene una clase llamada Cuadrado que extienda la 
+clase Figura e implemente la interfaz Coloreado. Como implementacion 
+de comoColorear retorne el mensaje Colorear los cuatro lados . 
+
+d) Disene una clase llamada Circulo que extienda la clase Figura. 
+
+e) Dibuje un diagrama UML que incluya Coloreado, Cuadrado, Circulo y 
+Figura.
+
+f ) Escriba un programa de prueba que cree un arreglo para cinco guras.
+Estas guras deben ser solo cuadrados o circulos (genere un numero 
+aleatorio 1-Cuadrado o 2Circulo para agregar al arreglo; los lados y 
+las radios tambien seran generados de manera aleatoria). 
+
+g) Posteriormente para cada objeto del arreglo muestre el area, el 
+permetro e invoque al metodo comoColorear si este objeto 
+tiene este metodo.
+*******************************************
+
++----------------+
+| <<interface>>  |
+|  Coloreado     |
++----------------+
+| + comoColorear(): String |
++----------------+
+
+            ▲ implements
+            |
++------------------------------+
+| Figura (abstract)            |
++------------------------------+
+| - color : String             |
++------------------------------+
+| + setColor(color: String)    |
+| + getColor(): String         |
+| + toString(): String         |
+| + area(): double  <<abstract>> |
+| + perimetro(): double <<abstract>> |
++------------------------------+
+      ▲                 ▲
+      |                 |
++--------------+  +--------------+
+| Cuadrado     |  | Circulo     |
++--------------+  +--------------+
+| - lado: double|  | - radio: double |
++--------------+  +--------------+
+| + area():double| | + area():double |
+| + perimetro():double | + perimetro():double |
+| + comoColorear():String |                  |
+| + toString():String     | + toString():String |
++-------------------------+--------------------+

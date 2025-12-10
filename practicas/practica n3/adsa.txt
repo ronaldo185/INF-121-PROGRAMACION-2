@@ -1,0 +1,28 @@
++-------------------+
+|      Juego        |
++-------------------+
+| - numeroDeVidas:int
+| - record:int
++-------------------+
+| + reiniciaPartida():void
+| + actualizaRecord():void
+| + quitaVida():boolean
++-------------------+
+
+            ▲
+            │ hereda
+            │
++----------------------------+
+|     JuegoAdivinaNumero     |
++----------------------------+
+| - numeroAAdivinar:int      |
++----------------------------+
+| + JuegoAdivinaNumero(vidas:int)
+| + juega():void
++----------------------------+
+
++-------------------+
+|    Aplicacion     |
++-------------------+
+| + main(String[]):void
++-------------------+

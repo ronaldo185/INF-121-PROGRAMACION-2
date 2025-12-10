@@ -1,0 +1,34 @@
++-------------------------+
+|   ObjetoGeometrico      |
++-------------------------+
+| - color: String         |
+| - rellenado: boolean    |
+| - fechaDeCreacion: Date |
++-------------------------+
+| + ObjetoGeometrico()                          |
+| + ObjetoGeometrico(color: String, rellenado: boolean) |
+| + getColor(): String                           |
+| + setColor(color: String)                     |
+| + isRellenado(): boolean                      |
+| + setRellenado(rellenado: boolean)           |
+| + getFechaDeCreacion(): Date                  |
+| + toString(): String                           |
++-------------------------+
+
+heredaa
++-------------------------+
+|        Triangulo        |
++-------------------------+
+| - lado1: double         |
+| - lado2: double         |
+| - lado3: double         |
++-------------------------+
+| + Triangulo()                                |
+| + Triangulo(lado1: double, lado2: double, lado3: double) |
+| + getLado1(): double                         |
+| + getLado2(): double                         |
+| + getLado3(): double                         |
+| + getArea(): double                           |
+| + getPerimetro(): double                      |
+| + toString(): String                           |
++-------------------------+

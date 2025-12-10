@@ -1,0 +1,22 @@
++---------------------------------------------------+
+|               AlgebraVectorial                    |
++---------------------------------------------------+
+| - a: list[float]                                  |
+| - b: list[float]                                  |
++---------------------------------------------------+
+| + AlgebraVectorial()                              |
+| + AlgebraVectorial(a: list[float])                |
+| + AlgebraVectorial(a: list[float], b: list[float])|
++---------------------------------------------------+
+| + perpendicular(): bool                           |
+| + perpendicular(op: int): bool                    |
+| + paralela(): bool                                |
+| + paralela(op: int): bool                         |
+| + proyeccion(): list[float]                       |
+| + componente(): float                             |
+| - norma(v: list[float]): float                    |
+| - suma(a,b): list[float]                          |
+| - resta(a,b): list[float]                         |
+| - dot(a,b): float                                 |
+| - cross(a,b): list[float]                         |
++---------------------------------------------------+

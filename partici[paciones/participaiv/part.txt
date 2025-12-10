@@ -1,0 +1,20 @@
++--------------------+
+|      Circulo2D     |
++--------------------+
+| - x: double        |
+| - y: double        |
+| - radio: double    |
++--------------------+
+| + Circulo2D()                           |
+| + Circulo2D(x: double, y: double, radio: double) |
+| + getX(): double                        |
+| + getY(): double                        |
+| + getRadio(): double                    |
+| + getArea(): double                     |
+| + getPerimetro(): double                |
+| + contiene(x: double, y: double): boolean |
+| + contiene(c: Circulo2D): boolean       |
+| + sobrepone(c: Circulo2D): boolean      |
++--------------------+
+
+

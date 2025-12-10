@@ -1,0 +1,66 @@
+Polimor smo y Clase Abstracta. Disene las clases llamadas 
+EmpleadoTiempoCompleto y EmpleadoTiempoHorario que extiendan 
+
+a la clase Empleado. La clase Empleado contiene: 
+a) El atributo: nombre de tipo String. 
+b) Un constructor que crea un objeto de Empleado con el argumento nombre. 
+c) Un metodo abstracto llamado CalcularSalarioMensual. 
+d) Un metodo llamado toString() que devuelve una descripcion de 
+los atributos de Empleado. 
+
+La clase EmpleadoTiempoCompleto contiene: 
+a) El atributo: salario anual de tipo double. 
+b) Un constructor que crea un EmpleadoTiempoCompleto con el salario 
+anual como argumento. 
+c) Un metodo llamado CalcularSalarioMensual que retorna el 
+salario mensual. 
+d) Un metodo llamado toString() que retorna una descripcion de 
+los atributos de la clase EmpleadoTiempoCompleto. 
+
+La clase EmpleadoTiempoHorario contiene: 
+a) Los atributos: horas trabajadas y tarifa por hora de tipos doubles. 
+b) Un constructor que crea un EmpleadoTiempoHorario con horas 
+trabajadas y tarifa por hora como argumentos. 
+c) Un metodo llamado CalcularSalarioMensual que retorna 
+el salario mensual. 
+d) Un metodo llamado toString() que retorna una descripcion de 
+los atributos de la clase EmpleadoTiempoHorario. 
+
+Dibuje los diagramas UML para las tres clases e implementelas. 
+Escriba un programa de prueba que solicite al usuario que introduzca los 
+datos de tres empleados a tiempo completo y dos empleados de 
+tiempo horario, almacene los cinco en un arreglo de tipo Empleado, 
+posteriormente muestre el nombre y salario de cada empleado. 
+
+Lo anterior se puede implementar en Java o en Python.
+**************************************************************
+------------------------------------
+Empleado
+------------------------------------
+- nombre : String
+------------------------------------
++ Empleado(nombre : String)
++ CalcularSalarioMensual() : double   <<abstract>>
++ toString() : String
+------------------------------------
+
+------------------------------------
+EmpleadoTiempoCompleto
+------------------------------------
+- salarioAnual : double
+------------------------------------
++ EmpleadoTiempoCompleto(nombre : String, salarioAnual : double)
++ CalcularSalarioMensual() : double
++ toString() : String
+------------------------------------
+
+------------------------------------
+EmpleadoTiempoHorario
+------------------------------------
+- horasTrabajadas : double
+- tarifaHora : double
+------------------------------------
++ EmpleadoTiempoHorario(nombre : String, horasTrabajadas : double, tarifaHora : double)
++ CalcularSalarioMensual() : double
++ toString() : String
+------------------------------------
